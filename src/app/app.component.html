@@ -2,4 +2,12 @@
 <courses></courses>
 <course></course>
 <authors></authors>
-<favorite [isFavorite]="post.isFavorite"></favorite>  
+<favorite [isFavorite]="post.isFavorite" (change)="onFavoriteChange($event)"></favorite>
+
+<bootstrap-panel>
+  <div class="heading">Heading</div>
+  <div class="body">
+    <h1>Heading</h1>
+    <p>It's nice to meet you buddy</p>
+  </div>
+</bootstrap-panel>
