@@ -13,6 +13,7 @@ import { FavoriteComponent } from './favorite/favorite.component';
 import { FormsModule } from '@angular/forms';
 import { TitleCasePipe } from './title-case.pipe';
 import { PanelComponent } from './panel/panel.component';
+import { ContactFormComponent } from './contact-form/contact-form.component';
 
 
 
@@ -25,7 +26,8 @@ import { PanelComponent } from './panel/panel.component';
     SummeryPipe,
     FavoriteComponent,
     TitleCasePipe,
-    PanelComponent
+    PanelComponent,
+    ContactFormComponent
   ],
   imports: [
     BrowserModule,
