@@ -13,7 +13,7 @@ import { Posts } from './posts';
 })
 export class PostsComponent implements OnInit{
   posts!: Posts[]
-  private url = 'https://jsonplaceholder.typicode.com/posts';
+  private url = 'https://fsdvjsonplaceholder.typicode.com/posts';
   constructor(private postsService: PostsService, private http: HttpClient){
     // this.postsService.getPosts()
     //   .subscribe(response => this.posts = response)
@@ -44,10 +44,9 @@ export class PostsComponent implements OnInit{
         post.id = response.id
         this.posts.splice(0,0,post)
       },(error: AppError) => {
-        if(error instanceof BadInputError)
+        if(error instanceof BadInputError){
           //this.form.setError(error.originalError)
-        alert('An unexpected error occurred');
-        console.log(error);
+        }else throw error
       })
   }
 
@@ -55,9 +54,6 @@ export class PostsComponent implements OnInit{
     this.postsService.updatePost(post)
       .subscribe(response => {
         console.log(response)
-      },error => {
-        alert('An unexpected error occurred');
-        console.log(error);
       })
   }
 
@@ -70,10 +66,7 @@ export class PostsComponent implements OnInit{
         if (error instanceof NotFoundError){
           alert('This post already deleted');
           console.log(error);
-        }else{
-          alert('An unexpected error occurred');
-          console.log(error);
-        }
+        }else throw error
       })
   }
 

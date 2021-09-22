@@ -11,17 +11,17 @@ import { BadInputError } from '../common/bad-input-error';
 @Injectable({
   providedIn: 'root'
 })
-export class PostsService{
+export class DataService{
   constructor(private http: HttpClient) { }
   private url = 'https://fsdfdjsonplaceholder.typicode.com/posts'
   
   
-  getPosts(): Observable<Posts[]>{
+  getAll(): Observable<Posts[]>{
     return this.http.get<Posts[]>(this.url)
   }
 
-  createPost(post: Posts){
-    return this.http.post<Posts>(this.url, JSON.stringify(post))
+  create(resource: any){
+    return this.http.post<Posts>(this.url, JSON.stringify(resource))
     .pipe(catchError((error: Response) => {
       if (error.status === 400){
         return throwError(new BadInputError(error))
@@ -30,18 +30,24 @@ export class PostsService{
     }))
   }
 
-  updatePost(post: Posts){
-    return this.http.patch(this.url+'/'+post.id,JSON.stringify({isRed: true}))
+  update(resource: any){
+    return this.http.patch(this.url+'/'+resource.id,JSON.stringify({isRed: true}))
   }
 
-  deletePost(id: number){
+  delete(id: number){
     return this.http.delete(this.url+'/'+ id)
-      .pipe(catchError((error: Response) => {
-        if (error.status === 404){
-          return throwError(new NotFoundError(error))
-        }
-        return throwError(new AppError(error))
-      }))
+      .pipe(catchError(this.handleError))
+  }
+
+  private handleError(error: Response){
+    if (error.status === 404){
+      return throwError(new NotFoundError(error))
+    }
+
+    if (error.status === 400){
+      return throwError(new BadInputError(error))
+    }
+    return throwError(new AppError(error))
   }
     
 }
