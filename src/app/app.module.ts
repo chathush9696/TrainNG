@@ -18,6 +18,7 @@ import { PostsComponent } from './posts/posts.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PostsService } from './services/posts.service';
 import { AppErrorHandler } from './common/app-error-handler';
+import { ForTestingComponent } from './for-testing/for-testing.component';
 
 
 
@@ -32,7 +33,8 @@ import { AppErrorHandler } from './common/app-error-handler';
     TitleCasePipe,
     PanelComponent,
     ContactFormComponent,
-    PostsComponent
+    PostsComponent,
+    ForTestingComponent
   ],
   imports: [
     BrowserModule,
